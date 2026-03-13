@@ -3,7 +3,7 @@ package org.lecture.model;
 import lombok.Getter;
 
 @Getter
-public enum GameFigure {
+public enum GameChoice {
     ROCK("R"),
     PAPER("P"),
     SCISSORS("S"),
@@ -11,7 +11,7 @@ public enum GameFigure {
 
     private final String shortName;
 
-    GameFigure(String shortName) {
+    GameChoice(String shortName) {
         this.shortName = shortName;
     }
 }
