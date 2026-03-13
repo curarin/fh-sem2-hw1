@@ -9,6 +9,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class GameScoreTest {
 
+    /**
+     * Validates the object counter to correctly count towards the winning player (=human) based on moves.
+     */
     @Test
     public void testHumanWinCounter() {
         GameMove gameMove = GameMove
@@ -18,13 +21,16 @@ public class GameScoreTest {
                 .build();
 
         GameScore gameScore = new GameScore();
-        gameScore.calculateWinner(gameMove);
+        gameScore.addToCount(gameMove.getWinner());
 
         assertEquals(Integer.valueOf(1), gameScore.humanWins);
         assertEquals(Integer.valueOf(0), gameScore.computerWins);
 
     }
 
+    /**
+     * Validates the object counter to correctly count towards the winning player (=computer) based on moves.
+     */
     @Test
     public void testComputerWinCounter() {
         GameMove gameMove = GameMove
@@ -34,64 +40,17 @@ public class GameScoreTest {
                 .build();
 
         GameScore gameScore = new GameScore();
-        gameScore.calculateWinner(gameMove);
+        gameScore.addToCount(gameMove.getWinner());
 
         assertEquals(Integer.valueOf(0), gameScore.humanWins);
         assertEquals(Integer.valueOf(1), gameScore.computerWins);
     }
 
-    @Test
-    public void testHumanWins() {
-        GameMove gameMove = GameMove
-                .builder()
-                .playerChoice(GameChoice.PAPER)
-                .computerChoice(GameChoice.ROCK)
-                .build();
 
-        GameScore gameScore = new GameScore();
-        gameScore.calculateWinner(gameMove);
 
-        assertEquals(GamePlayer.HUMAN, gameMove.getWinner());
-    }
-
-    @Test
-    public void testComputerWins() {
-        GameMove gameMove = GameMove
-                .builder()
-                .playerChoice(GameChoice.ROCK)
-                .computerChoice(GameChoice.PAPER)
-                .build();
-
-        GameScore gameScore = new GameScore();
-        gameScore.calculateWinner(gameMove);
-
-        assertEquals(GamePlayer.COMPUTER, gameMove.getWinner());
-    }
-
-    @Test
-    public void testEmptyMoveAlwaysLooses() {
-        GameMove gameMove = GameMove
-                .builder()
-                .playerChoice(GameChoice.EMPTY)
-                .computerChoice(GameChoice.PAPER)
-                .build();
-
-        GameScore gameScore = new GameScore();
-        gameScore.calculateWinner(gameMove);
-
-        assertEquals(GamePlayer.COMPUTER, gameMove.getWinner());
-
-        GameMove gameMove2 = GameMove
-                .builder()
-                .playerChoice(GameChoice.SCISSORS)
-                .computerChoice(GameChoice.EMPTY)
-                .build();
-
-        gameScore.calculateWinner(gameMove2);
-
-        assertEquals(GamePlayer.HUMAN, gameMove2.getWinner());
-    }
-
+    /**
+     * Validates that over the course of the game, which consists of many moves, the counter works as expected.
+     */
     @Test
     public void testScoreCounterWithMultipleMoves() {
         GameMove gameMove = GameMove
@@ -101,7 +60,7 @@ public class GameScoreTest {
                 .build();
 
         GameScore gameScore = new GameScore();
-        gameScore.calculateWinner(gameMove);
+        gameScore.addToCount(gameMove.getWinner());
 
         assertEquals(Integer.valueOf(1), gameScore.humanWins);
 
@@ -111,7 +70,7 @@ public class GameScoreTest {
                 .computerChoice(GameChoice.PAPER)
                 .build();
 
-        gameScore.calculateWinner(gameMove2);
+        gameScore.addToCount(gameMove2.getWinner());
 
         assertEquals(Integer.valueOf(1), gameScore.humanWins);
         assertEquals(Integer.valueOf(1), gameScore.computerWins);
@@ -122,111 +81,39 @@ public class GameScoreTest {
                 .computerChoice(GameChoice.ROCK)
                 .build();
 
-        gameScore.calculateWinner(gameMove3);
+        gameScore.addToCount(gameMove3.getWinner());
 
         assertEquals(Integer.valueOf(1), gameScore.humanWins);
         assertEquals(Integer.valueOf(2), gameScore.computerWins);
     }
 
+    /**
+     * Validates the game is running as long as noone won 3 games.
+     */
     @Test
-    public void testWinnerWithMultipleMoves() {
-        GameMove gameMove = GameMove
-                .builder()
-                .playerChoice(GameChoice.PAPER)
-                .computerChoice(GameChoice.ROCK)
-                .build();
-
+    public void testGameIsRunningWithLessThan3Wins() {
         GameScore gameScore = new GameScore();
-        gameScore.calculateWinner(gameMove);
+        gameScore.addToCount(GamePlayer.HUMAN);
+        gameScore.addToCount(GamePlayer.COMPUTER);
+        gameScore.addToCount(GamePlayer.COMPUTER);
+        gameScore.addToCount(GamePlayer.HUMAN);
 
-        assertEquals(GamePlayer.HUMAN, gameMove.getWinner());
-
-        GameMove gameMove2 = GameMove
-                .builder()
-                .playerChoice(GameChoice.ROCK)
-                .computerChoice(GameChoice.PAPER)
-                .build();
-
-        assertEquals(GamePlayer.COMPUTER, gameScore.calculateWinner(gameMove2).getWinner());
-
-        GameMove gameMove3 = GameMove
-                .builder()
-                .playerChoice(GameChoice.SCISSORS)
-                .computerChoice(GameChoice.ROCK)
-                .build();
-
-        assertEquals(GamePlayer.COMPUTER, gameScore.calculateWinner(gameMove3).getWinner());
+        assertEquals(gameScore.gameIsRunning(), true);
     }
 
+    /**
+     * Validates the game is over with the first person hitting 3 wins.
+     */
     @Test
-    public void testRockBeatsScissors() {
-        GameMove gameMove = GameMove
-                .builder()
-                .playerChoice(GameChoice.ROCK)
-                .computerChoice(GameChoice.SCISSORS)
-                .build();
-
+    public void testGameIsOverWith3Wins() {
         GameScore gameScore = new GameScore();
-        gameScore.calculateWinner(gameMove);
+        gameScore.addToCount(GamePlayer.HUMAN);
+        gameScore.addToCount(GamePlayer.COMPUTER);
+        gameScore.addToCount(GamePlayer.COMPUTER);
+        gameScore.addToCount(GamePlayer.COMPUTER);
 
-        assertEquals(GamePlayer.HUMAN, gameMove.getWinner());
-
-        GameMove gameMove2 = GameMove
-                .builder()
-                .playerChoice(GameChoice.SCISSORS)
-                .computerChoice(GameChoice.ROCK)
-                .build();
-
-        gameScore.calculateWinner(gameMove2);
-
-        assertEquals(GamePlayer.COMPUTER, gameMove2.getWinner());
+        assertEquals(gameScore.gameIsRunning(), false);
     }
 
-    @Test
-    public void testPaperBeatsRock() {
-        GameMove gameMove = GameMove
-                .builder()
-                .playerChoice(GameChoice.PAPER)
-                .computerChoice(GameChoice.ROCK)
-                .build();
 
-        GameScore gameScore = new GameScore();
-        gameScore.calculateWinner(gameMove);
-
-        assertEquals(GamePlayer.HUMAN, gameMove.getWinner());
-
-        GameMove gameMove2 = GameMove
-                .builder()
-                .playerChoice(GameChoice.ROCK)
-                .computerChoice(GameChoice.PAPER)
-                .build();
-
-        gameScore.calculateWinner(gameMove2);
-
-        assertEquals(GamePlayer.COMPUTER, gameMove2.getWinner());
-    }
-
-    @Test
-    public void testScissorsBeatsPaper() {
-        GameMove gameMove = GameMove
-                .builder()
-                .playerChoice(GameChoice.SCISSORS)
-                .computerChoice(GameChoice.PAPER)
-                .build();
-
-        GameScore gameScore = new GameScore();
-        gameScore.calculateWinner(gameMove);
-
-        assertEquals(GamePlayer.HUMAN, gameMove.getWinner());
-
-        GameMove gameMove2 = GameMove
-                .builder()
-                .playerChoice(GameChoice.PAPER)
-                .computerChoice(GameChoice.SCISSORS)
-                .build();
-
-        gameScore.calculateWinner(gameMove2);
-
-        assertEquals(GamePlayer.COMPUTER, gameMove2.getWinner());
-    }
 }

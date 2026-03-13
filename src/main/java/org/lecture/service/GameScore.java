@@ -15,32 +15,16 @@ public class GameScore {
     public int humanWins = 0;
     public int computerWins = 0;
 
-    public GameMove calculateWinner(GameMove gameMove) {
-        if (
-                gameMove.getPlayerChoice() == GameChoice.ROCK && (
-                        gameMove.getComputerChoice() == GameChoice.SCISSORS || gameMove.getComputerChoice() == GameChoice.EMPTY)
-        ) {
-            humanWins += 1;
-            gameMove.setWinner(GamePlayer.HUMAN);
-        } else if (
-                gameMove.getPlayerChoice() == GameChoice.PAPER && (
-                        gameMove.getComputerChoice() == GameChoice.ROCK || gameMove.getComputerChoice() == GameChoice.EMPTY
-                        )
-        ) {
-            humanWins += 1;
-            gameMove.setWinner(GamePlayer.HUMAN);
-        } else if (
-                gameMove.getPlayerChoice() == GameChoice.SCISSORS && (
-                        gameMove.getComputerChoice() == GameChoice.PAPER || gameMove.getComputerChoice() == GameChoice.EMPTY
-                        )
-        ) {
-            humanWins += 1;
-            gameMove.setWinner(GamePlayer.HUMAN);
+    public void addToCount(GamePlayer winner) {
+        if (winner.equals(GamePlayer.COMPUTER)) {
+            computerWins++;
+        } else if (winner.equals(GamePlayer.HUMAN)) {
+            humanWins++;
         }
-        else {
-            computerWins += 1;
-            gameMove.setWinner(GamePlayer.COMPUTER);
-        }
-        return gameMove;
     }
+
+    public boolean gameIsRunning() {
+        return this.humanWins < 3 && this.computerWins < 3;
+    }
+
 }
