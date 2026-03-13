@@ -20,6 +20,7 @@ public class GameBoard {
     public void printGameBoard() {
         log.trace("printGameBoard");
         log.info("gameMoves = {}", gameMoves);
+        System.out.println("---------- Current GameBoard -----------");
         for (GameMove gameMove : this.gameMoves) {
             System.out.printf(
                     "%s x %s : %s\n",
@@ -28,6 +29,7 @@ public class GameBoard {
                     gameMove.getWinner().getName()
             );
         }
+        System.out.println("----------------------------------------\n");
     }
 
     /**
