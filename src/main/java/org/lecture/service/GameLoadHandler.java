@@ -11,6 +11,7 @@ public class GameLoadHandler {
      *
      * @param gameSaveSlot the game slot number
      */
+    // ToDo: Noch zur Gänze zu entwickeln
     public GameLoadHandler(String gameSaveSlot) {
         this.gameSaveSlot = gameSaveSlot;
     }

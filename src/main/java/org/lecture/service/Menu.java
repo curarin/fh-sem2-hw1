@@ -32,4 +32,6 @@ public class Menu {
         System.out.println(choiceMenu);
     }
 
+    // ToDo: Input Parsing für Game Save & Game Load
+
 }

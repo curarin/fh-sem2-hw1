@@ -55,6 +55,7 @@ public final class GameBoard {
         } else {
             boardWinner = GamePlayer.DRAW;
         }
+        log.info("board Winner: {}", boardWinner);
         if (boardWinner.equals(GamePlayer.DRAW)) {
             System.out.println("The game ended in an STALEMATE. Thanks for playing.");
         } else {
@@ -62,6 +63,7 @@ public final class GameBoard {
                     .stream()
                     .filter(gameMove -> gameMove.getWinner().equals(boardWinner))
                     .toList();
+            log.info("Winning Game Moves: {}", winningGameMoves);
             System.out.printf("Congrat to %s - you won with the following picks:\n", boardWinner.getName());
             for (GameMove gameMove : winningGameMoves) {
                 if (boardWinner.equals(GamePlayer.HUMAN)) {
