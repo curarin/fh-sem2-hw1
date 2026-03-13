@@ -229,5 +229,4 @@ public class GameScoreTest {
 
         assertEquals(GamePlayer.COMPUTER, gameMove2.getWinner());
     }
-    ı
 }
