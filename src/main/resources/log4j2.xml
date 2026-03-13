@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Sources für die Implementierung hier:
+ - https://logging.apache.org/log4j/2.3.x/manual/configuration.html
+ - https://www.sentinelone.com/blog/log4j2-configuration-detailed-guide-2/
+ - https://www.digitalocean.com/community/tutorials/log4j2-example-tutorial-configuration-levels-appenders
+-->
+<Configuration>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Root level="TRACE">
+            <AppenderRef ref="Console"/>
+        </Root>
+    </Loggers>
+</Configuration>

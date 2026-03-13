@@ -1,14 +1,19 @@
 package org.lecture.model;
 
+import lombok.extern.log4j.Log4j2;
+
 import java.util.Random;
 
 /**
  * Very complex algorithm which returns a totally random gameChoice object.
  */
+@Log4j2
 public class GameArtificialIntelligence {
     public GameChoice getAiChoice() {
+        log.trace("getAiChoice()");
         Random random = new Random();
         int rng = random.nextInt(3);
+        log.info("rng is '{}'", rng);
 
         GameChoice aiGameChoice = null;
 

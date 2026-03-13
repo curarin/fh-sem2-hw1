@@ -8,12 +8,20 @@ import java.util.Scanner;
 @Log4j2
 public class InputHandler {
 
-    public GameChoice getRockPaperScissorsInput() {
+    private String getInput() {
+        log.trace("getInput()");
         Scanner scanner = new Scanner(System.in);
-        String choice = scanner.nextLine();
+        return scanner.nextLine();
+    }
+
+    public GameChoice getRockPaperScissorsInput() {
+        log.trace("getRockPaperScissorsInput()");
+        String choice = this.getInput();
 
         char startingLetter = choice.toLowerCase().charAt(0);
 
+        log.info("choice given is '{}'", choice);
+        log.info("starting letter is '{}'", startingLetter);
         if (startingLetter == 'r') {
             return GameChoice.ROCK;
         } else if (startingLetter == 'p') {
@@ -22,7 +30,7 @@ public class InputHandler {
             return GameChoice.SCISSORS;
         } else {
             // ToDo: Anforderung = Man soll wieder picken können in dem Case, so lange bis was valides dabei ist.
-            log.error("Invalid choice");
+            log.error("Invalid input choice for ROCK, PAPER or SCISSORS. Given was '{}'", choice);
             return GameChoice.EMPTY;
         }
     }

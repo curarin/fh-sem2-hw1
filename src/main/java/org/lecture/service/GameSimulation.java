@@ -1,5 +1,6 @@
 package org.lecture.service;
 
+import lombok.AccessLevel;
 import lombok.extern.log4j.Log4j2;
 import org.lecture.handler.InputHandler;
 import org.lecture.model.*;
@@ -7,6 +8,7 @@ import org.lecture.model.*;
 @Log4j2
 public class GameSimulation {
     public void runSimulation() {
+        log.trace("runSimulation()");
         Menu menu = new Menu();
         GameBoard gameBoard = new GameBoard();
         GameScore gameScore = new GameScore();

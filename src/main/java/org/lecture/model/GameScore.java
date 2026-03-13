@@ -18,11 +18,15 @@ public class GameScore {
      * @param winner The player who won the last gameMove based on calculation in gameMove class.
      */
     public void addToCount(GamePlayer winner) {
+        log.trace("addToCount");
         if (winner.equals(GamePlayer.COMPUTER)) {
+            log.info("Computer wins - +1 counted towards computerWinCounter");
             computerWinCounter++;
         } else if (winner.equals(GamePlayer.HUMAN)) {
+            log.info("Human wins - +1 counted towards humanWinCounter");
             humanWinCounter++;
         } else if (winner.equals(GamePlayer.NONE)) {
+            log.info("Move ended in draw - +1 counted towards drawCounter");
             drawCounter++;
         }
     }
@@ -32,6 +36,7 @@ public class GameScore {
      * @return false when one of each player (human or computer) won 3 games - this ends the game.
      */
     public boolean gameIsRunning() {
+        log.trace("gameIsRunning()");
         return this.humanWinCounter < 3 && this.computerWinCounter < 3;
     }
 

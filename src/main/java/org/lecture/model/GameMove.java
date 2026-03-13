@@ -1,12 +1,14 @@
 package org.lecture.model;
 
 import lombok.*;
+import lombok.extern.log4j.Log4j2;
 
 /**
  * Represents a game move of a ROCK-PAPER-SCISSORS game.
  */
 @ToString
 @Getter
+@Log4j2
 public class GameMove {
     private final GameChoice playerChoice;
     private final GameChoice computerChoice;
@@ -29,6 +31,9 @@ public class GameMove {
      * @return Human, Computer or No Winner (in case of draw)
      */
     private GamePlayer calculateWinner() {
+        log.trace("calculateWinner");
+        log.info("Player choice is '{}'", playerChoice);
+        log.info("Computer choice is '{}'", computerChoice);
         if (
                 (
                         this.playerChoice == GameChoice.ROCK && (
@@ -45,12 +50,15 @@ public class GameMove {
                                                 )
                                         ))
         ) {
+            log.info("Winner is: HUMAN");
             return GamePlayer.HUMAN;
         } else if (
                 this.playerChoice.equals(this.computerChoice)
         ) {
+            log.info("Game ends in: DRAW");
             return GamePlayer.NONE;
         } else {
+            log.info("Winner is: COMPUTER");
             return GamePlayer.COMPUTER;
         }
     }
