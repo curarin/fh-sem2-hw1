@@ -8,7 +8,8 @@ import lombok.Getter;
 @Getter
 public enum GamePlayer {
     HUMAN("Player"),
-    COMPUTER("Computer");
+    COMPUTER("Computer"),
+    NONE("None");
 
     private final String name;
 

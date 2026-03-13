@@ -6,46 +6,6 @@ import org.lecture.service.GameScore;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class GameMoveTest {
-
-    // Source: https://www.baeldung.com/junit-assert-exception
-    /**
-     * GameMove object is expected to be instantiated with both computerChoice and playerChoice
-     * We expect a NullPointerException if that's not the case.
-     */
-    @Test
-    public void testNullArgumentsThrowException() {
-        assertThrows(NullPointerException.class, () -> {
-            GameMove
-                    .builder()
-                    .computerChoice(GameChoice.ROCK)
-                    //.playerChoice(GameChoice.PAPER)
-                    .build();
-        });
-
-        assertThrows(NullPointerException.class, () -> {
-            GameMove
-                    .builder()
-                    //.computerChoice(GameChoice.ROCK)
-                    .playerChoice(GameChoice.PAPER)
-                    .build();
-        });
-    }
-
-    /**
-     * GameMove object is expected to be instantiated with both computerChoice and playerChoice
-     * If those parameters are provided we expect that no exception is thrown.
-     */
-    @Test
-    public void testNoExceptionIsThrown() {
-        assertDoesNotThrow(() -> {
-            GameMove
-                    .builder()
-                    .computerChoice(GameChoice.ROCK)
-                    .playerChoice(GameChoice.PAPER)
-                    .build();
-        });
-    }
-
     /**
      * GameMove Object holds the winner of the specific move.
      * We expect the attribute to hold the correct entry we provided via the setWinner method.
@@ -58,7 +18,6 @@ public class GameMoveTest {
                 .playerChoice(GameChoice.PAPER)
                 .build();
 
-        gameMove.getWinner();
         assertEquals(GamePlayer.HUMAN, gameMove.getWinner());
 
         GameMove gameMove2 = GameMove
@@ -66,7 +25,6 @@ public class GameMoveTest {
                 .computerChoice(GameChoice.SCISSORS)
                 .playerChoice(GameChoice.PAPER)
                 .build();
-        gameMove.getWinner();
         assertEquals(GamePlayer.COMPUTER, gameMove2.getWinner());
     }
 

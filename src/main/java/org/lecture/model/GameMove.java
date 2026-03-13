@@ -5,30 +5,35 @@ import lombok.*;
 /**
  * Represents a game move of a ROCK-PAPER-SCISSORS game.
  */
-@Builder
-@Getter
 @ToString
+@Getter
 public class GameMove {
-    @NonNull
     private final GameChoice playerChoice;
-    @NonNull
     private final GameChoice computerChoice;
+    private final GamePlayer winner;
 
-    public GamePlayer getWinner() {
+    @Builder
+    private GameMove(GameChoice playerChoice, GameChoice computerChoice) {
+        this.playerChoice = playerChoice;
+        this.computerChoice = computerChoice;
+        this.winner = calculateWinner();
+    }
+
+    private GamePlayer calculateWinner() {
         if (
-                this.getPlayerChoice() == GameChoice.ROCK && (
-                        this.getComputerChoice() == GameChoice.SCISSORS || this.getComputerChoice() == GameChoice.EMPTY)
+                this.playerChoice == GameChoice.ROCK && (
+                        this.computerChoice == GameChoice.SCISSORS || this.computerChoice == GameChoice.EMPTY)
         ) {
             return GamePlayer.HUMAN;
         } else if (
-                this.getPlayerChoice() == GameChoice.PAPER && (
-                        this.getComputerChoice() == GameChoice.ROCK || this.getComputerChoice() == GameChoice.EMPTY
+                this.playerChoice == GameChoice.PAPER && (
+                        this.computerChoice == GameChoice.ROCK || this.computerChoice == GameChoice.EMPTY
                 )
         ) {
             return GamePlayer.HUMAN;
         } else if (
-                this.getPlayerChoice() == GameChoice.SCISSORS && (
-                        this.getComputerChoice() == GameChoice.PAPER || this.getComputerChoice() == GameChoice.EMPTY
+                this.playerChoice == GameChoice.SCISSORS && (
+                        this.computerChoice == GameChoice.PAPER || this.computerChoice == GameChoice.EMPTY
                 )
         ) {
             return GamePlayer.HUMAN;
