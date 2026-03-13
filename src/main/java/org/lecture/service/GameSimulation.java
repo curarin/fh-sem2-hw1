@@ -17,11 +17,10 @@ public class GameSimulation {
         GameArtificialIntelligence gameAiMove = new GameArtificialIntelligence();
 
         menu.mainMenu();
-
+        gameBoard.printGameBoard();
         boolean isRunning;
-
         do {
-            gameBoard.printGameBoard();
+
             menu.choiceMenu();
             GameChoice currentPlayerGameChoice = inputHandler.getRockPaperScissorsInput();
 
@@ -38,6 +37,6 @@ public class GameSimulation {
             moveCounter++;
         } while (isRunning);
 
-        gameBoard.printEndOfGameMessage();
+        gameBoard.printEndOfGameMessage(gameScore);
     }
 }

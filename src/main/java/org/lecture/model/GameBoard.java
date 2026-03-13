@@ -3,6 +3,8 @@ import lombok.extern.log4j.Log4j2;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Represents the game board as a whole of a ROCK-PAPER-SCISSORS game.
@@ -10,7 +12,6 @@ import java.util.ArrayList;
  */
 @Log4j2
 public final class GameBoard {
-    public ArrayList<GameMove> gameMoves = new ArrayList<>();
     public GameMove[] gameMovesArray = {
             GameMove.builder().playerChoice(GameChoice.EMPTY).computerChoice(GameChoice.EMPTY).build(),
             GameMove.builder().playerChoice(GameChoice.EMPTY).computerChoice(GameChoice.EMPTY).build(),
@@ -28,7 +29,6 @@ public final class GameBoard {
 
     public void printGameBoard() {
         log.trace("printGameBoard");
-        log.info("gameMoves = {}", gameMoves);
         System.out.println("---------- Current GameBoard -----------");
         for (GameMove gameMove : this.gameMovesArray) {
             System.out.printf(
@@ -44,8 +44,32 @@ public final class GameBoard {
     /**
      * Prints end of game statistics depending on who one. Utilizes java streams for that.
      */
-    public void printEndOfGameMessage() {
+    public void printEndOfGameMessage(GameScore gameScore) {
         log.trace("printEndOfGameMessage");
-
+        List<GameMove> gameMoves = Arrays.asList(gameMovesArray);
+        GamePlayer boardWinner;
+        if (gameScore.getComputerWinCounter() > gameScore.getHumanWinCounter()) {
+            boardWinner = GamePlayer.COMPUTER;
+        } else if (gameScore.getHumanWinCounter() > gameScore.getComputerWinCounter()) {
+            boardWinner = GamePlayer.HUMAN;
+        } else {
+            boardWinner = GamePlayer.DRAW;
+        }
+        if (boardWinner.equals(GamePlayer.DRAW)) {
+            System.out.println("The game ended in an STALEMATE. Thanks for playing.");
+        } else {
+            List<GameMove> winningGameMoves = gameMoves
+                    .stream()
+                    .filter(gameMove -> gameMove.getWinner().equals(boardWinner))
+                    .toList();
+            System.out.printf("Congrat to %s - you won with the following picks:\n", boardWinner.getName());
+            for (GameMove gameMove : winningGameMoves) {
+                if (boardWinner.equals(GamePlayer.HUMAN)) {
+                    System.out.printf("%s (versus: %s)\n", gameMove.getPlayerChoice(), gameMove.getComputerChoice());
+                } else {
+                    System.out.printf("%s (versus: %s)\n", gameMove.getComputerChoice(), gameMove.getPlayerChoice());
+                }
+            }
+        }
     }
 }
