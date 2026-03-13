@@ -18,8 +18,15 @@ public class GameBoard {
                     "%s x %s : %s\n",
                     gameMove.getPlayerChoice().getShortName(),
                     gameMove.getComputerChoice().getShortName(),
-                    gameMove.getWinner()
+                    gameMove.getWinner().getName()
             );
         }
+    }
+
+    /**
+     * Prints end of game statistics depending on who one. Utilizes java streams for that.
+     */
+    public void printEndOfGameMessage() {
+        
     }
 }

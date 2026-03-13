@@ -1,7 +1,6 @@
 package org.lecture.model;
 
 import org.junit.jupiter.api.Test;
-import org.lecture.service.GameScore;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -58,6 +57,21 @@ public class GameMoveTest {
     }
 
     /**
+     * Validates that draw is correctly recognized.
+     */
+    @Test
+    public void testDraw() {
+        GameMove gameMove = GameMove
+                .builder()
+                .playerChoice(GameChoice.ROCK)
+                .computerChoice(GameChoice.ROCK)
+                .build();
+
+
+        assertEquals(GamePlayer.NONE, gameMove.getWinner());
+    }
+
+    /**
      * Validates that if no choice is provided (aka EMPTY) then this player always looses.
      */
     @Test
@@ -107,8 +121,19 @@ public class GameMoveTest {
                 .build();
 
         assertEquals(GamePlayer.COMPUTER, gameMove3.getWinner());
+
+        GameMove gameMove4 = GameMove
+                .builder()
+                .playerChoice(GameChoice.SCISSORS)
+                .computerChoice(GameChoice.SCISSORS)
+                .build();
+
+        assertEquals(GamePlayer.NONE, gameMove4.getWinner());
     }
 
+    /**
+     * Validates that Rock correctly beats Scissors.
+     */
     @Test
     public void testRockBeatsScissors() {
         GameMove gameMove = GameMove
@@ -128,6 +153,9 @@ public class GameMoveTest {
         assertEquals(GamePlayer.COMPUTER, gameMove2.getWinner());
     }
 
+    /**
+     * Validates that paper correctly beats rock.
+     */
     @Test
     public void testPaperBeatsRock() {
         GameMove gameMove = GameMove
@@ -147,6 +175,9 @@ public class GameMoveTest {
         assertEquals(GamePlayer.COMPUTER, gameMove2.getWinner());
     }
 
+    /**
+     * Validates that Scissors correctly beat paper.
+     */
     @Test
     public void testScissorsBeatsPaper() {
         GameMove gameMove = GameMove
@@ -164,5 +195,33 @@ public class GameMoveTest {
                 .build();
 
         assertEquals(GamePlayer.COMPUTER, gameMove2.getWinner());
+    }
+
+    /**
+     * validates that same picks always end in draw.
+     */
+    @Test
+    public void testNoneWinsAgainstSamePick() {
+        GameMove gameMoveScissors = GameMove
+                .builder()
+                .playerChoice(GameChoice.SCISSORS)
+                .computerChoice(GameChoice.SCISSORS)
+                .build();
+
+        GameMove gameMoveRock = GameMove
+                .builder()
+                .playerChoice(GameChoice.ROCK)
+                .computerChoice(GameChoice.ROCK)
+                .build();
+
+        GameMove gameMovePaper = GameMove
+                .builder()
+                .playerChoice(GameChoice.PAPER)
+                .computerChoice(GameChoice.PAPER)
+                .build();
+
+        assertEquals(GamePlayer.NONE, gameMoveScissors.getWinner());
+        assertEquals(GamePlayer.NONE, gameMoveRock.getWinner());
+        assertEquals(GamePlayer.NONE, gameMovePaper.getWinner());
     }
 }

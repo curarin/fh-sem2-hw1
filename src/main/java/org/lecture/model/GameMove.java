@@ -12,6 +12,11 @@ public class GameMove {
     private final GameChoice computerChoice;
     private final GamePlayer winner;
 
+    /**
+     *
+     * @param playerChoice Whatever a player picked (Rock, Paper or Scissors)
+     * @param computerChoice Whatever the magical AI algorithms choose for the gameMove (Rock, Paper or Scissors)
+     */
     @Builder
     private GameMove(GameChoice playerChoice, GameChoice computerChoice) {
         this.playerChoice = playerChoice;
@@ -19,26 +24,33 @@ public class GameMove {
         this.winner = calculateWinner();
     }
 
+    /**
+     * Business logic for calculating the winner based on input choices
+     * @return Human, Computer or No Winner (in case of draw)
+     */
     private GamePlayer calculateWinner() {
         if (
-                this.playerChoice == GameChoice.ROCK && (
-                        this.computerChoice == GameChoice.SCISSORS || this.computerChoice == GameChoice.EMPTY)
+                (
+                        this.playerChoice == GameChoice.ROCK && (
+                                this.computerChoice == GameChoice.SCISSORS || this.computerChoice == GameChoice.EMPTY))
+                ||
+                        (
+                                this.playerChoice == GameChoice.PAPER && (
+                                        this.computerChoice == GameChoice.ROCK || this.computerChoice == GameChoice.EMPTY
+                                )
+                                ||
+                                        (
+                                                this.playerChoice == GameChoice.SCISSORS && (
+                                                        this.computerChoice == GameChoice.PAPER || this.computerChoice == GameChoice.EMPTY
+                                                )
+                                        ))
         ) {
             return GamePlayer.HUMAN;
         } else if (
-                this.playerChoice == GameChoice.PAPER && (
-                        this.computerChoice == GameChoice.ROCK || this.computerChoice == GameChoice.EMPTY
-                )
+                this.playerChoice.equals(this.computerChoice)
         ) {
-            return GamePlayer.HUMAN;
-        } else if (
-                this.playerChoice == GameChoice.SCISSORS && (
-                        this.computerChoice == GameChoice.PAPER || this.computerChoice == GameChoice.EMPTY
-                )
-        ) {
-            return GamePlayer.HUMAN;
-        }
-        else {
+            return GamePlayer.NONE;
+        } else {
             return GamePlayer.COMPUTER;
         }
     }

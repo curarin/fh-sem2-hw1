@@ -2,25 +2,22 @@ package org.lecture.service;
 
 import lombok.extern.log4j.Log4j2;
 import org.lecture.handler.InputHandler;
-import org.lecture.model.GameArtificalIntelligence;
-import org.lecture.model.GameBoard;
-import org.lecture.model.GameChoice;
-import org.lecture.model.GameMove;
+import org.lecture.model.*;
 
 @Log4j2
 public class GameSimulation {
     public void runSimulation() {
         Menu menu = new Menu();
         GameBoard gameBoard = new GameBoard();
+        GameScore gameScore = new GameScore();
         InputHandler inputHandler = new InputHandler();
-        GameArtificalIntelligence gameAiMove = new GameArtificalIntelligence();
+        GameArtificialIntelligence gameAiMove = new GameArtificialIntelligence();
 
         menu.mainMenu();
 
-        boolean isRunning = false;
+        boolean isRunning;
 
         do {
-            isRunning = true;
             menu.choiceMenu();
             GameChoice currentPlayerGameChoice = inputHandler.getRockPaperScissorsInput();
 
@@ -30,10 +27,12 @@ public class GameSimulation {
                     .computerChoice(currentComputerGameChoice)
                     .build();
 
-            System.out.println(currentGameMove);
+            gameScore.addToCount(currentGameMove.getWinner());
             gameBoard.addGameMoveToGameBoard(currentGameMove);
             gameBoard.printGameBoard();
-
+            isRunning = gameScore.gameIsRunning();
         } while (isRunning);
+
+        gameBoard.printEndOfGameMessage();
     }
 }

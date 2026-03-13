@@ -5,7 +5,7 @@ import java.util.Random;
 /**
  * Very complex algorithm which returns a totally random gameChoice object.
  */
-public class GameArtificalIntelligence {
+public class GameArtificialIntelligence {
     public GameChoice getAiChoice() {
         Random random = new Random();
         int rng = random.nextInt(3);
