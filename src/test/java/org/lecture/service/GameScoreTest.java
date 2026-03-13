@@ -5,7 +5,7 @@ import org.lecture.model.GameChoice;
 import org.lecture.model.GameMove;
 import org.lecture.model.GamePlayer;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class GameScoreTest {
 
@@ -98,7 +98,7 @@ public class GameScoreTest {
         gameScore.addToCount(GamePlayer.COMPUTER);
         gameScore.addToCount(GamePlayer.HUMAN);
 
-        assertEquals(gameScore.gameIsRunning(), true);
+        assertTrue(gameScore.gameIsRunning());
     }
 
     /**
@@ -112,7 +112,7 @@ public class GameScoreTest {
         gameScore.addToCount(GamePlayer.COMPUTER);
         gameScore.addToCount(GamePlayer.COMPUTER);
 
-        assertEquals(gameScore.gameIsRunning(), false);
+        assertFalse(gameScore.gameIsRunning());
     }
 
 
