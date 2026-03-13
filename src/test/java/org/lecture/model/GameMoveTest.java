@@ -68,7 +68,7 @@ public class GameMoveTest {
                 .build();
 
 
-        assertEquals(GamePlayer.NONE, gameMove.getWinner());
+        assertEquals(GamePlayer.DRAW, gameMove.getWinner());
     }
 
     /**
@@ -128,7 +128,7 @@ public class GameMoveTest {
                 .computerChoice(GameChoice.SCISSORS)
                 .build();
 
-        assertEquals(GamePlayer.NONE, gameMove4.getWinner());
+        assertEquals(GamePlayer.DRAW, gameMove4.getWinner());
     }
 
     /**
@@ -220,8 +220,22 @@ public class GameMoveTest {
                 .computerChoice(GameChoice.PAPER)
                 .build();
 
-        assertEquals(GamePlayer.NONE, gameMoveScissors.getWinner());
-        assertEquals(GamePlayer.NONE, gameMoveRock.getWinner());
-        assertEquals(GamePlayer.NONE, gameMovePaper.getWinner());
+        assertEquals(GamePlayer.DRAW, gameMoveScissors.getWinner());
+        assertEquals(GamePlayer.DRAW, gameMoveRock.getWinner());
+        assertEquals(GamePlayer.DRAW, gameMovePaper.getWinner());
+    }
+
+    /**
+     * validates placeholder picks.
+     */
+    @Test
+    public void testPlaceholderPicksPriorToGameStart() {
+        GameMove gameMoveEmpty = GameMove
+                .builder()
+                .playerChoice(GameChoice.EMPTY)
+                .computerChoice(GameChoice.EMPTY)
+                .build();
+
+        assertEquals("N/A", gameMoveEmpty.getWinner().getName());
     }
 }

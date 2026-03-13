@@ -25,7 +25,7 @@ public class GameScore {
         } else if (winner.equals(GamePlayer.HUMAN)) {
             log.info("Human wins - +1 counted towards humanWinCounter");
             humanWinCounter++;
-        } else if (winner.equals(GamePlayer.NONE)) {
+        } else if (winner.equals(GamePlayer.DRAW)) {
             log.info("Move ended in draw - +1 counted towards drawCounter");
             drawCounter++;
         }
@@ -37,7 +37,7 @@ public class GameScore {
      */
     public boolean gameIsRunning() {
         log.trace("gameIsRunning()");
-        return this.humanWinCounter < 3 && this.computerWinCounter < 3;
+        return (this.humanWinCounter + this.computerWinCounter + this.drawCounter) < 5;
     }
 
 }

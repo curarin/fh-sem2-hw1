@@ -9,7 +9,8 @@ import lombok.Getter;
 public enum GamePlayer {
     HUMAN("Player"),
     COMPUTER("Computer"),
-    NONE("Draw");
+    NOT_SET("N/A"),
+    DRAW("Draw");
 
     private final String name;
 

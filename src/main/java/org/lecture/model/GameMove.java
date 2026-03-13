@@ -53,10 +53,14 @@ public class GameMove {
             log.info("Winner is: HUMAN");
             return GamePlayer.HUMAN;
         } else if (
+                this.playerChoice == GameChoice.EMPTY && this.computerChoice == GameChoice.EMPTY
+        ) {
+            return GamePlayer.NOT_SET;
+        } else if (
                 this.playerChoice.equals(this.computerChoice)
         ) {
             log.info("Game ends in: DRAW");
-            return GamePlayer.NONE;
+            return GamePlayer.DRAW;
         } else {
             log.info("Winner is: COMPUTER");
             return GamePlayer.COMPUTER;

@@ -12,8 +12,8 @@ Es wird in 5 Runden gespielt. Pro Runde wird angegeben, welches Symbol der:die S
 Gewonnen hat, wer mind. 3 Runden für sich entscheiden konnte. Nach jeder Runde wird der Gewinner ermittelt und angezeigt
 
 Ein Beispielbrett nach 2 Runden sieht in der Ausgabe wie folgt aus
-R x S : Player
-S x P : Computer
+- R x S : Player
+- S x P : Computer
 - x - : N/A
 - x - : N/A
 - x - : N/A

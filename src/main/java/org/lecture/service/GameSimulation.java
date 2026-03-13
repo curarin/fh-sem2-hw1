@@ -10,6 +10,7 @@ public class GameSimulation {
     public void runSimulation() {
         log.trace("runSimulation()");
         Menu menu = new Menu();
+        int moveCounter = 0;
         GameBoard gameBoard = new GameBoard();
         GameScore gameScore = new GameScore();
         InputHandler inputHandler = new InputHandler();
@@ -20,6 +21,7 @@ public class GameSimulation {
         boolean isRunning;
 
         do {
+            gameBoard.printGameBoard();
             menu.choiceMenu();
             GameChoice currentPlayerGameChoice = inputHandler.getRockPaperScissorsInput();
 
@@ -30,9 +32,10 @@ public class GameSimulation {
                     .build();
 
             gameScore.addToCount(currentGameMove.getWinner());
-            gameBoard.addGameMoveToGameBoard(currentGameMove);
+            gameBoard.addGameMoveToGameBoard(currentGameMove, moveCounter);
             gameBoard.printGameBoard();
             isRunning = gameScore.gameIsRunning();
+            moveCounter++;
         } while (isRunning);
 
         gameBoard.printEndOfGameMessage();
