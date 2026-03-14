@@ -32,6 +32,30 @@ public class Menu {
         System.out.println(choiceMenu);
     }
 
-    // ToDo: Input Parsing für Game Save & Game Load
+    /**
+     * Menu which is used to get input of a player. Prompts the user to either play or load.
+     */
+    public void gameActionPlayOrLoad() {
+        log.trace("gameActionPlayOrLoad()");
+        String choiceMenu = """
+                Do you want to:
+                 - (P)lay?
+                 - (L)oad existing game safe?
+                """;
+        System.out.println(choiceMenu);
+    }
+
+    /**
+     * Menu which is used to get input of a player. Prompts the user to either play or safe.
+     */
+    public void gameActionPlayOrSafe() {
+        log.trace("gameActionPlayOrSafe()");
+        String choiceMenu = """
+                Do you want to:
+                 - (P)lay?
+                 - (S)afe current game?
+                """;
+        System.out.println(choiceMenu);
+    }
 
 }

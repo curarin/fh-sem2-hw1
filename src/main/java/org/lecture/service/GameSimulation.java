@@ -16,6 +16,12 @@ public class GameSimulation {
         GameArtificialIntelligence gameAiMove = new GameArtificialIntelligence();
 
         menu.mainMenu();
+        menu.gameActionPlayOrLoad();
+        GameAction startingGameAction = inputHandler.getGameActionInput();
+        if(startingGameAction.equals(GameAction.LOAD)) {
+            log.info("Loading game...");
+        }
+
         gameBoard.printGameBoard();
         boolean isRunning;
         do {
@@ -31,7 +37,15 @@ public class GameSimulation {
                 gameScore.addToCount(currentGameMove.getWinner());
                 gameBoard.addGameMoveToGameBoard(currentGameMove, moveCounter);
                 gameBoard.printGameBoard();
+
+
+                menu.gameActionPlayOrSafe();
+                GameAction currentGameAction = inputHandler.getGameActionInput();
+                if(currentGameAction.equals(GameAction.SAFE)) {
+                    log.info("Safe current state to file.");
+                }
                 moveCounter++;
+
             } catch (IllegalArgumentException e) {
                 log.error(e.getMessage());
             } finally {

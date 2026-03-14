@@ -2,6 +2,7 @@ package org.lecture.handler;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
+import org.lecture.model.GameAction;
 import org.lecture.model.GameChoice;
 
 import java.util.Scanner;
@@ -43,6 +44,28 @@ public class InputHandler {
             return GameChoice.SCISSORS;
         } else {
             return GameChoice.EMPTY;
+        }
+    }
+
+    public GameAction getGameActionInput() {
+        log.trace("getGameActionInput()");
+        String choice;
+        if (this.input == null) {
+            choice = this.getInput();
+        } else {
+            choice = this.input;
+        }
+        char startingLetter = choice.toLowerCase().charAt(0);
+        log.info("choice given is '{}'", choice);
+        log.info("starting letter is '{}'", startingLetter);
+        if (startingLetter == 's') {
+            return GameAction.SAFE;
+        } else if (startingLetter == 'l') {
+            return GameAction.LOAD;
+        } else if (startingLetter == 'p') {
+            return GameAction.PLAY;
+        } else {
+            return GameAction.NOTHING;
         }
     }
 }
