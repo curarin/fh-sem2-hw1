@@ -15,7 +15,7 @@ public class FileWriter {
     public void writeFile(GameMove[] gameMovesArray) throws IOException {
         LocalDateTime currentTimestamp = LocalDateTime.now();
 
-        Path path = Paths.get("src", "main", "resources", "gameSafes", currentTimestamp + ".txt");
+        Path path = Paths.get("src", "main", "resources", "gameSafes", currentTimestamp + ".csv");
 
         if (Files.notExists(path)) {
             Files.createDirectories(path.getParent());
