@@ -1,8 +1,11 @@
 package org.lecture.service;
 
 import lombok.extern.log4j.Log4j2;
+import org.lecture.handler.FileWriter;
 import org.lecture.handler.InputHandler;
 import org.lecture.model.*;
+
+import java.io.IOException;
 
 @Log4j2
 public class GameSimulation {
@@ -43,11 +46,15 @@ public class GameSimulation {
                 GameAction currentGameAction = inputHandler.getGameActionInput();
                 if(currentGameAction.equals(GameAction.SAFE)) {
                     log.info("Safe current state to file.");
+                    FileWriter fileWriter = new FileWriter();
+                    fileWriter.writeFile(gameBoard.gameMovesArray);
                 }
                 moveCounter++;
 
             } catch (IllegalArgumentException e) {
                 log.error(e.getMessage());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             } finally {
                 isRunning = gameScore.gameIsRunning();
             }
