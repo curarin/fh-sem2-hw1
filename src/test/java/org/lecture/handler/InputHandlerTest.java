@@ -1,6 +1,7 @@
 package org.lecture.handler;
 
 import org.junit.jupiter.api.Test;
+import org.lecture.model.GameAction;
 import org.lecture.model.GameChoice;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -54,6 +55,29 @@ public class InputHandlerTest {
 
         inputHandler.setInput("dingerdonger");
         assertEquals(GameChoice.EMPTY, inputHandler.getRockPaperScissorsInput());
+
+    }
+
+    /**
+     * Validates that we get the correct game action returned with our input.
+     */
+    @Test
+    public void testCorrectGameActionIsReturned() {
+        InputHandler inputHandler = new InputHandler();
+        inputHandler.setInput("load");
+        assertEquals(GameAction.LOAD, inputHandler.getGameActionInput());
+
+        inputHandler.setInput("LOAD");
+        assertEquals(GameAction.LOAD, inputHandler.getGameActionInput());
+
+        inputHandler.setInput("L");
+        assertEquals(GameAction.LOAD, inputHandler.getGameActionInput());
+
+        inputHandler.setInput("Safe");
+        assertEquals(GameAction.SAFE, inputHandler.getGameActionInput());
+
+        inputHandler.setInput("s");
+        assertEquals(GameAction.SAFE, inputHandler.getGameActionInput());
 
     }
 }
