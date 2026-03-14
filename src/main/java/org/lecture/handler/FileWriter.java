@@ -1,5 +1,6 @@
 package org.lecture.handler;
 
+import lombok.extern.log4j.Log4j2;
 import org.lecture.model.GameMove;
 
 import java.io.BufferedWriter;
@@ -8,8 +9,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
 
+@Log4j2
 public class FileWriter {
     public void writeFile(GameMove[] gameMovesArray) throws IOException {
         LocalDateTime currentTimestamp = LocalDateTime.now();
@@ -21,18 +22,17 @@ public class FileWriter {
         }
 
         try (BufferedWriter bw = Files.newBufferedWriter(path)) {
+            bw.write("playerChoice;computerChoice;moveWinner\n");
             for (GameMove gameMove : gameMovesArray) {
                 writeData(gameMove, bw);
                 bw.newLine();
             }
         }
-        System.out.printf(
-                "File successfully written to '%s'.\n",
-                path)
-        ;
+        log.info("File written successfully to {}", path);
+        System.out.println("Game successfully saved.");
     }
 
     private static void writeData(GameMove gameMove, BufferedWriter bw) throws IOException {
-        bw.write(String.format("%s,%s,%s", gameMove.getPlayerChoice(), gameMove.getComputerChoice(), gameMove.getWinner()));
+        bw.write(String.format("%s;%s;%s", gameMove.getPlayerChoice(), gameMove.getComputerChoice(), gameMove.getWinner()));
     }
 }
