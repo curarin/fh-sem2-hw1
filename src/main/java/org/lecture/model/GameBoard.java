@@ -47,26 +47,19 @@ public final class GameBoard {
     public void printEndOfGameMessage(GameScore gameScore) {
         log.trace("printEndOfGameMessage");
         List<GameMove> gameMoves = Arrays.asList(gameMovesArray);
-        GamePlayer boardWinner;
-        if (gameScore.getComputerWinCounter() > gameScore.getHumanWinCounter()) {
-            boardWinner = GamePlayer.COMPUTER;
-        } else if (gameScore.getHumanWinCounter() > gameScore.getComputerWinCounter()) {
-            boardWinner = GamePlayer.HUMAN;
-        } else {
-            boardWinner = GamePlayer.DRAW;
-        }
-        log.info("board Winner: {}", boardWinner);
-        if (boardWinner.equals(GamePlayer.DRAW)) {
+        log.info("board Winner: {}", gameScore.getGameWinner());
+
+        if (gameScore.getGameWinner().equals(GamePlayer.DRAW)) {
             System.out.println("The game ended in an STALEMATE. Thanks for playing.");
         } else {
             List<GameMove> winningGameMoves = gameMoves
                     .stream()
-                    .filter(gameMove -> gameMove.getWinner().equals(boardWinner))
+                    .filter(gameMove -> gameMove.getWinner().equals(gameScore.getGameWinner()))
                     .toList();
             log.info("Winning Game Moves: {}", winningGameMoves);
-            System.out.printf("Congrat to %s - you won with the following picks:\n", boardWinner.getName());
+            System.out.printf("Congrat to %s - you won with the following picks:\n", gameScore.getGameWinner().getName());
             for (GameMove gameMove : winningGameMoves) {
-                if (boardWinner.equals(GamePlayer.HUMAN)) {
+                if (gameScore.getGameWinner().equals(GamePlayer.HUMAN)) {
                     System.out.printf("%s (versus: %s)\n", gameMove.getPlayerChoice(), gameMove.getComputerChoice());
                 } else {
                     System.out.printf("%s (versus: %s)\n", gameMove.getComputerChoice(), gameMove.getPlayerChoice());

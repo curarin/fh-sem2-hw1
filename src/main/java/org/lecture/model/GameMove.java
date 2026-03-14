@@ -30,7 +30,7 @@ public class GameMove {
      * Business logic for calculating the winner based on input choices
      * @return Human, Computer or No Winner (in case of draw)
      */
-    private GamePlayer calculateWinner() {
+    private GamePlayer calculateWinner() throws IllegalArgumentException {
         log.trace("calculateWinner");
         log.info("Player choice is '{}'", playerChoice);
         log.info("Computer choice is '{}'", computerChoice);
@@ -52,13 +52,12 @@ public class GameMove {
         ) {
             log.info("Winner is: HUMAN");
             return GamePlayer.HUMAN;
-        } else if (
-                this.playerChoice == GameChoice.EMPTY && this.computerChoice == GameChoice.EMPTY
-        ) {
+        } else if (this.playerChoice == GameChoice.EMPTY && this.computerChoice == GameChoice.EMPTY) {
             return GamePlayer.NOT_SET;
-        } else if (
-                this.playerChoice.equals(this.computerChoice)
-        ) {
+        } else if (this.playerChoice == GameChoice.EMPTY || this.computerChoice == GameChoice.EMPTY) {
+                throw new IllegalArgumentException("Please pick either Rock, Paper or Scissors");
+        }
+        else if (this.playerChoice.equals(this.computerChoice)) {
             log.info("Game ends in: DRAW");
             return GamePlayer.DRAW;
         } else {

@@ -1,6 +1,5 @@
 package org.lecture.service;
 
-import lombok.AccessLevel;
 import lombok.extern.log4j.Log4j2;
 import org.lecture.handler.InputHandler;
 import org.lecture.model.*;
@@ -20,21 +19,24 @@ public class GameSimulation {
         gameBoard.printGameBoard();
         boolean isRunning;
         do {
-
             menu.choiceMenu();
             GameChoice currentPlayerGameChoice = inputHandler.getRockPaperScissorsInput();
 
             GameChoice currentComputerGameChoice = gameAiMove.getAiChoice();
-            GameMove currentGameMove = GameMove.builder()
-                    .playerChoice(currentPlayerGameChoice)
-                    .computerChoice(currentComputerGameChoice)
-                    .build();
-
-            gameScore.addToCount(currentGameMove.getWinner());
-            gameBoard.addGameMoveToGameBoard(currentGameMove, moveCounter);
-            gameBoard.printGameBoard();
-            isRunning = gameScore.gameIsRunning();
-            moveCounter++;
+            try {
+                GameMove currentGameMove = GameMove.builder()
+                        .playerChoice(currentPlayerGameChoice)
+                        .computerChoice(currentComputerGameChoice)
+                        .build();
+                gameScore.addToCount(currentGameMove.getWinner());
+                gameBoard.addGameMoveToGameBoard(currentGameMove, moveCounter);
+                gameBoard.printGameBoard();
+                moveCounter++;
+            } catch (IllegalArgumentException e) {
+                log.error(e.getMessage());
+            } finally {
+                isRunning = gameScore.gameIsRunning();
+            }
         } while (isRunning);
 
         gameBoard.printEndOfGameMessage(gameScore);

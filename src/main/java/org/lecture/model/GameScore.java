@@ -9,9 +9,9 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 @Getter
 public class GameScore {
-    public int humanWinCounter = 0;
-    public int computerWinCounter = 0;
-    public int drawCounter = 0;
+    private int humanWinCounter = 0;
+    private int computerWinCounter = 0;
+    private int drawCounter = 0;
 
     /**
      * Takes the winning player and stores metrics for the board game. can be used to get humanWins, computerWins or draws.
@@ -32,12 +32,28 @@ public class GameScore {
     }
 
     /**
-     * Business logic for the running game state
-     * @return false when one of each player (human or computer) won 3 games - this ends the game.
+     * Business logic for the running game state - logic is:
+     * either 5 rounds are played OR either human or computer won >= 3 games
+     * @return false when game is over
      */
     public boolean gameIsRunning() {
         log.trace("gameIsRunning()");
-        return (this.humanWinCounter + this.computerWinCounter + this.drawCounter) < 5;
+        return this.humanWinCounter < 3 && this.computerWinCounter < 3 && (this.humanWinCounter + this.computerWinCounter + this.drawCounter) < 5;
     }
+
+    /**
+     *
+     */
+    public GamePlayer getGameWinner() {
+        log.trace("getGameWinner()");
+        if (this.humanWinCounter >= 3) {
+            return GamePlayer.HUMAN;
+        } else if (this.computerWinCounter >= 3) {
+            return GamePlayer.COMPUTER;
+        } else {
+            return GamePlayer.DRAW;
+        }
+    }
+
 
 }

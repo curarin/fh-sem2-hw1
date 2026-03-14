@@ -72,28 +72,6 @@ public class GameMoveTest {
     }
 
     /**
-     * Validates that if no choice is provided (aka EMPTY) then this player always looses.
-     */
-    @Test
-    public void testEmptyMoveAlwaysLooses() {
-        GameMove gameMove = GameMove
-                .builder()
-                .playerChoice(GameChoice.EMPTY)
-                .computerChoice(GameChoice.PAPER)
-                .build();
-
-        assertEquals(GamePlayer.COMPUTER, gameMove.getWinner());
-
-        GameMove gameMove2 = GameMove
-                .builder()
-                .playerChoice(GameChoice.SCISSORS)
-                .computerChoice(GameChoice.EMPTY)
-                .build();
-
-        assertEquals(GamePlayer.HUMAN, gameMove2.getWinner());
-    }
-
-    /**
      * Validates that over the course of the game, which consists of many moves, the winner of each move works as expected.
      */
     @Test
@@ -226,16 +204,16 @@ public class GameMoveTest {
     }
 
     /**
-     * validates placeholder picks.
+     * validates that an exception os thrown when input was incorrect.
      */
     @Test
-    public void testPlaceholderPicksPriorToGameStart() {
-        GameMove gameMoveEmpty = GameMove
-                .builder()
-                .playerChoice(GameChoice.EMPTY)
-                .computerChoice(GameChoice.EMPTY)
-                .build();
-
-        assertEquals("N/A", gameMoveEmpty.getWinner().getName());
+    public void testGameMoveThrowsExceptionWhenHumanPickIsEmptyDueToIncorrectInput() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            GameMove gameMoveEmpty = GameMove
+                    .builder()
+                    .playerChoice(GameChoice.EMPTY)
+                    .computerChoice(GameChoice.SCISSORS)
+                    .build();
+        });
     }
 }
