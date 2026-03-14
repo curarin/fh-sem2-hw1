@@ -2,10 +2,13 @@ package org.lecture.service;
 
 import lombok.extern.log4j.Log4j2;
 import org.lecture.handler.FileWriter;
+import org.lecture.handler.FileReader;
+
 import org.lecture.handler.InputHandler;
 import org.lecture.model.*;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 @Log4j2
 public class GameSimulation {
@@ -21,8 +24,15 @@ public class GameSimulation {
         menu.mainMenu();
         menu.gameActionPlayOrLoad();
         GameAction startingGameAction = inputHandler.getGameActionInput();
+
         if(startingGameAction.equals(GameAction.LOAD)) {
             log.info("Loading game...");
+            GameLoadHandler gameLoadHandler = new GameLoadHandler();
+
+            gameLoadHandler.printTop10LatestGameSafes();
+            int safeGamePositionWanted = inputHandler.getGameSavePosition();
+            gameScore = gameLoadHandler.generateGameScoreFromGameSafe(gameLoadHandler.getFileNameBasedOnGameSafePosition(safeGamePositionWanted));
+            gameBoard = gameLoadHandler.generateGameBoardFromGameSafe(gameLoadHandler.getFileNameBasedOnGameSafePosition(safeGamePositionWanted));
         }
 
         gameBoard.printGameBoard();
