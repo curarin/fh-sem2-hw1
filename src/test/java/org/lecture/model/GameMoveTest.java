@@ -68,7 +68,7 @@ public class GameMoveTest {
                 .build();
 
 
-        assertEquals(GamePlayer.DRAW, gameMove.getWinner());
+        assertEquals(GamePlayer.NO_WINNER, gameMove.getWinner());
     }
 
     /**
@@ -106,7 +106,7 @@ public class GameMoveTest {
                 .computerChoice(GameChoice.SCISSORS)
                 .build();
 
-        assertEquals(GamePlayer.DRAW, gameMove4.getWinner());
+        assertEquals(GamePlayer.NO_WINNER, gameMove4.getWinner());
     }
 
     /**
@@ -198,9 +198,9 @@ public class GameMoveTest {
                 .computerChoice(GameChoice.PAPER)
                 .build();
 
-        assertEquals(GamePlayer.DRAW, gameMoveScissors.getWinner());
-        assertEquals(GamePlayer.DRAW, gameMoveRock.getWinner());
-        assertEquals(GamePlayer.DRAW, gameMovePaper.getWinner());
+        assertEquals(GamePlayer.NO_WINNER, gameMoveScissors.getWinner());
+        assertEquals(GamePlayer.NO_WINNER, gameMoveRock.getWinner());
+        assertEquals(GamePlayer.NO_WINNER, gameMovePaper.getWinner());
     }
 
     /**

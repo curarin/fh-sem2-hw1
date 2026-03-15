@@ -171,7 +171,7 @@ public class GameScoreTest {
         gameScore.addToCount(GamePlayer.HUMAN);
         gameScore.addToCount(GamePlayer.HUMAN);
         gameScore.addToCount(GamePlayer.COMPUTER);
-        gameScore.addToCount(GamePlayer.DRAW);
+        gameScore.addToCount(GamePlayer.NO_WINNER);
         gameScore.addToCount(GamePlayer.COMPUTER);
 
         assertFalse(gameScore.gameIsRunning());
@@ -216,7 +216,7 @@ public class GameScoreTest {
         gameScore.addToCount(GamePlayer.COMPUTER);
         gameScore.addToCount(GamePlayer.COMPUTER);
 
-        assertEquals(GamePlayer.DRAW, gameScore.getGameWinner());
+        assertEquals(GamePlayer.NO_WINNER, gameScore.getGameWinner());
     }
 
 

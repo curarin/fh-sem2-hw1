@@ -10,7 +10,7 @@ public enum GamePlayer {
     HUMAN("Player"),
     COMPUTER("Computer"),
     NOT_SET("N/A"),
-    DRAW("Draw");
+    NO_WINNER("Draw");
 
     private final String name;
 

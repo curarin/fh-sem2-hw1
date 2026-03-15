@@ -1,8 +1,6 @@
 package org.lecture.model;
 import lombok.extern.log4j.Log4j2;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -49,7 +47,7 @@ public final class GameBoard {
         List<GameMove> gameMoves = Arrays.asList(gameMovesArray);
         log.info("board Winner: {}", gameScore.getGameWinner());
 
-        if (gameScore.getGameWinner().equals(GamePlayer.DRAW)) {
+        if (gameScore.getGameWinner().equals(GamePlayer.NO_WINNER)) {
             System.out.println("The game ended in an STALEMATE. Thanks for playing.");
         } else {
             List<GameMove> winningGameMoves = gameMoves

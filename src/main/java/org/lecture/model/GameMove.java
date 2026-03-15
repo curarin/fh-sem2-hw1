@@ -59,7 +59,7 @@ public class GameMove {
         }
         else if (this.playerChoice.equals(this.computerChoice)) {
             log.info("Game ends in: DRAW");
-            return GamePlayer.DRAW;
+            return GamePlayer.NO_WINNER;
         } else {
             log.info("Winner is: COMPUTER");
             return GamePlayer.COMPUTER;
