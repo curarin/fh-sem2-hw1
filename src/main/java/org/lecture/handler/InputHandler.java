@@ -16,12 +16,20 @@ public class InputHandler {
     String input;
 
 
+    /**
+     * Gets input from Scanner > this is called in 'production' (because we dont set input manually in prod)
+     * @return Input from user as string
+     */
     private String getInput() {
         log.trace("getInput()");
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
 
+    /**
+     * Gets input for user choices - either Rock, Paper or Scissors are needed
+     * @return GameChoice (ROCK, PAPER, SCISSORS)
+     */
     public GameChoice getRockPaperScissorsInput() {
         log.trace("getRockPaperScissorsInput()");
         String choice;
@@ -47,6 +55,10 @@ public class InputHandler {
         }
     }
 
+    /**
+     * Is used when we prompt the user if they want to safe, load or play the game
+     * @return GameAction (SAFE, LOAD, PLAY, NOTHING)
+     */
     public GameAction getGameActionInput() {
         log.trace("getGameActionInput()");
         String choice;

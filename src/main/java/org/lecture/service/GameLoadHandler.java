@@ -15,6 +15,10 @@ public class GameLoadHandler {
     private int safeGameMoveCounterStart = 0;
     private final String gameSaveFileNameWanted = "safeGame.csv";
 
+    /**
+     * Generates the gameBoard from game safe
+     * @return GameBoard object with state of moves previously done and safed.
+     */
     public GameBoard generateGameBoardFromGameSafe() {
         log.trace("generateGameBoardFromGameSafe()");
         FileReader fileReader = new FileReader();
@@ -32,6 +36,10 @@ public class GameLoadHandler {
         return gameBoard;
     }
 
+    /**
+     * Generates the gameScore object from the loaded file
+     * @return gameScore which consists of humanWinCounter, computerWinCounter
+     */
     public GameScore generateGameScoreFromGameSafe() {
         FileReader fileReader = new FileReader();
         GameBoard gameBoard = fileReader.readGameBoard(this.gameSaveFileNameWanted);
