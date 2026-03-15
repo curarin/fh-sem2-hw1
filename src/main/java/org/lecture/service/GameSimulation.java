@@ -53,13 +53,14 @@ public class GameSimulation {
                 gameBoard.addGameMoveToGameBoard(currentGameMove, moveCounter);
                 gameBoard.printGameBoard();
 
-
-                menu.gameActionPlayOrSafe();
-                GameAction currentGameAction = inputHandler.getGameActionInput();
-                if(currentGameAction.equals(GameAction.SAFE)) {
-                    log.info("Safe current state to file.");
-                    FileWriter fileWriter = new FileWriter();
-                    fileWriter.writeFile(gameBoard.gameMovesArray);
+                if(gameScore.gameIsRunning()) {
+                    menu.gameActionPlayOrSafe();
+                    GameAction currentGameAction = inputHandler.getGameActionInput();
+                    if(currentGameAction.equals(GameAction.SAFE)) {
+                        log.info("Safe current state to file.");
+                        FileWriter fileWriter = new FileWriter();
+                        fileWriter.writeFile(gameBoard.gameMovesArray);
+                    }
                 }
                 moveCounter++;
 

@@ -68,17 +68,4 @@ public class InputHandler {
             return GameAction.NOTHING;
         }
     }
-
-    public int getGameSavePosition() {
-        log.trace("getGameSavePosition()");
-        String choice;
-        if (this.input == null) {
-            choice = this.getInput();
-        } else {
-            choice = this.input;
-        }
-        int savePosition = Integer.parseInt(choice);
-        log.info("Position choosen is '{}'", savePosition);
-        return savePosition;
-    }
 }
