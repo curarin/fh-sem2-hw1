@@ -15,7 +15,7 @@ public class GameArtificialIntelligence {
         int rng = random.nextInt(3);
         log.info("rng is '{}'", rng);
 
-        GameChoice aiGameChoice = null;
+        GameChoice aiGameChoice;
 
         switch (rng) {
             case 0 -> aiGameChoice = GameChoice.ROCK;
