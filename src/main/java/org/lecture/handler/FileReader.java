@@ -30,7 +30,7 @@ public class FileReader {
                             .playerChoice(GameChoice.valueOf(values[0]))
                             .computerChoice(GameChoice.valueOf(values[1]))
                             .build();
-                    gameBoard.addGameMoveToGameBoard(currentGameMove, gameMoveCounter);
+                    gameBoard = gameBoard.addGameMoveToGameBoard(currentGameMove);
                     gameMoveCounter++;
                 } catch (Exception e) {
                     System.out.println("Fehler beim Parsen der Zeile: " + line);

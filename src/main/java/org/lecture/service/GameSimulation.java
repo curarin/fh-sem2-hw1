@@ -2,7 +2,6 @@ package org.lecture.service;
 
 import lombok.extern.log4j.Log4j2;
 import org.lecture.handler.FileWriter;
-import org.lecture.handler.FileReader;
 
 import org.lecture.handler.InputHandler;
 import org.lecture.model.*;
@@ -10,14 +9,12 @@ import org.lecture.model.*;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Arrays;
 
 @Log4j2
 public class GameSimulation {
     public void runSimulation() {
         log.trace("runSimulation()");
         Menu menu = new Menu();
-        int moveCounter = 0;
         GameBoard gameBoard = new GameBoard();
         GameScore gameScore = new GameScore();
         InputHandler inputHandler = new InputHandler();
@@ -33,7 +30,7 @@ public class GameSimulation {
                 GameLoadHandler gameLoadHandler = new GameLoadHandler();
                 gameScore = gameLoadHandler.generateGameScoreFromGameSafe();
                 gameBoard = gameLoadHandler.generateGameBoardFromGameSafe();
-                moveCounter = gameLoadHandler.getSafeGameMoveCounterStart();
+                System.out.println(gameBoard);
             }
         }
 
@@ -50,7 +47,9 @@ public class GameSimulation {
                         .computerChoice(currentComputerGameChoice)
                         .build();
                 gameScore.addToCount(currentGameMove.getWinner());
-                gameBoard.addGameMoveToGameBoard(currentGameMove, moveCounter);
+                gameBoard = gameBoard.addGameMoveToGameBoard(currentGameMove);
+                System.out.println(gameBoard);
+                System.out.println(gameScore);
                 gameBoard.printGameBoard();
 
                 if(gameScore.gameIsRunning()) {
@@ -59,10 +58,9 @@ public class GameSimulation {
                     if(currentGameAction.equals(GameAction.SAFE)) {
                         log.info("Safe current state to file.");
                         FileWriter fileWriter = new FileWriter();
-                        fileWriter.writeFile(gameBoard.gameMovesArray);
+                        fileWriter.writeFile(gameBoard.getGameMoves());
                     }
                 }
-                moveCounter++;
 
             } catch (IllegalArgumentException e) {
                 log.error(e.getMessage());
