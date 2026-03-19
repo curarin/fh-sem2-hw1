@@ -15,6 +15,12 @@ import java.util.List;
  */
 @Log4j2
 public class FileWriter {
+
+    /**
+     * Writes directly to file based on a list of GameMoves
+     * @param gameMoves List of Game Moves as input
+     * @throws IOException Due to using the BufferedWriter this can throw an exception
+     */
     public void writeFile(List<GameMove> gameMoves) throws IOException {
         Path path = Paths.get("src", "main", "resources", "gameSafes", "safeGame.csv");
 
@@ -33,6 +39,12 @@ public class FileWriter {
         System.out.println("Game successfully saved.");
     }
 
+    /**
+     * Writes the set schema to the file.
+     * @param gameMove GameMove which repesents what the player picked, computer picked and who the winner is
+     * @param bw bufferd Writer
+     * @throws IOException can throw an exception due to bufferd writer
+     */
     private static void writeData(GameMove gameMove, BufferedWriter bw) throws IOException {
         bw.write(String.format("%s;%s;%s", gameMove.getPlayerChoice(), gameMove.getComputerChoice(), gameMove.getWinner()));
     }
