@@ -44,7 +44,8 @@ public class GameScore {
     }
 
     /**
-     *
+     * Business logic für game winner. NO_WINNER equals draw.
+     * @return GamePlayer > can be either of HUMAN, COMPUTER or NO_WINNER
      */
     public GamePlayer getGameWinner() {
         log.trace("getGameWinner()");
