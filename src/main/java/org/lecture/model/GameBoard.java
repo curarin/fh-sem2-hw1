@@ -24,14 +24,17 @@ public final class GameBoard {
         List<GameMove> initialGameMoves = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             initialGameMoves.add(
-                    GameMove.builder().playerChoice(GameChoice.EMPTY).computerChoice(GameChoice.EMPTY).build()
+                    GameMove.builder()
+                            .playerChoice(GameChoice.EMPTY)
+                            .computerChoice(GameChoice.EMPTY)
+                            .build()
             );
         }
         this.gameMoves = List.copyOf(initialGameMoves);
     }
 
     /**
-     * Constructor used when loading an existing game state - persists the immutable state.
+     * Constructor used when returning an new state of the game after adding a GameMove to the board.
      * @param gameMoves list of game moves (e.g. from file loading)
      */
     public GameBoard(List<GameMove> gameMoves) {
