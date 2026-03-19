@@ -6,7 +6,10 @@ import org.lecture.model.GameBoard;
 import org.lecture.model.GameMove;
 import org.lecture.model.GameScore;
 
-
+/**
+ * Abstraction for GameLoading - used to call at the beginning of a Rock-Paper-Scissors-Game
+ * on demand in order to load one (!) single game state which was previously safed.
+ */
 @Log4j2
 public class GameLoadHandler {
     private final String gameSaveFileNameWanted = "safeGame.csv";

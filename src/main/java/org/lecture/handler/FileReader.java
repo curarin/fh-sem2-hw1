@@ -9,11 +9,12 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+/**
+ * File Reader which reads an existing file from a .csv and returns an immutable instance of the gameboard.
+ */
 public class FileReader {
-
     public GameBoard readGameBoard(String fileName) {
         GameBoard gameBoard = new GameBoard();
-        int gameMoveCounter = 0;
 
         try (BufferedReader reader = Files.newBufferedReader(Paths.get("src", "main", "resources", "gameSafes", fileName))) {
             String line;
@@ -31,7 +32,6 @@ public class FileReader {
                             .computerChoice(GameChoice.valueOf(values[1]))
                             .build();
                     gameBoard = gameBoard.addGameMoveToGameBoard(currentGameMove);
-                    gameMoveCounter++;
                 } catch (Exception e) {
                     System.out.println("Fehler beim Parsen der Zeile: " + line);
                     e.printStackTrace();

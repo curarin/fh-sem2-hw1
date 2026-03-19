@@ -2,6 +2,9 @@ package org.lecture.service;
 
 import lombok.extern.log4j.Log4j2;
 
+/**
+ * Menu class - used for printing introductions and prompts to terminal.
+ */
 @Log4j2
 public class Menu {
 

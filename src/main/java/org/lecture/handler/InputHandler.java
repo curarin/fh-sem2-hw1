@@ -1,30 +1,22 @@
 package org.lecture.handler;
 
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.lecture.model.GameAction;
 import org.lecture.model.GameChoice;
 
-import java.util.Scanner;
-
 /**
  * Helper function for input handling. Setter is used as helper for unit testing this.
+ * Two constructors are here to be used - no args for production, all args for unit tests.
  */
 @Log4j2
-@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
 public class InputHandler {
     String input;
-
-
-    /**
-     * Gets input from Scanner > this is called in 'production' (because we dont set input manually in prod)
-     * @return Input from user as string
-     */
-    private String getInput() {
-        log.trace("getInput()");
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
-    }
 
     /**
      * Gets input for user choices - either Rock, Paper or Scissors are needed
@@ -32,13 +24,7 @@ public class InputHandler {
      */
     public GameChoice getRockPaperScissorsInput() {
         log.trace("getRockPaperScissorsInput()");
-        String choice;
-        if (this.input == null) {
-            choice = this.getInput();
-        } else {
-            choice = this.input;
-        }
-        //String choice = this.getInput();
+        String choice = this.input;
 
         char startingLetter = choice.toLowerCase().charAt(0);
 
@@ -61,12 +47,7 @@ public class InputHandler {
      */
     public GameAction getGameActionInput() {
         log.trace("getGameActionInput()");
-        String choice;
-        if (this.input == null) {
-            choice = this.getInput();
-        } else {
-            choice = this.input;
-        }
+        String choice = this.input;
         char startingLetter = choice.toLowerCase().charAt(0);
         log.info("choice given is '{}'", choice);
         log.info("starting letter is '{}'", startingLetter);

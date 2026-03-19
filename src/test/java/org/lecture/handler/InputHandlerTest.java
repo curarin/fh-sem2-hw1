@@ -13,34 +13,33 @@ public class InputHandlerTest {
      */
     @Test
     public void testHappyPathInputWithFullOrPartialVariations() {
-        InputHandler inputHandler = new InputHandler();
-        inputHandler.setInput("Rock");
+        InputHandler inputHandler = new InputHandler("Rock");
         assertEquals(GameChoice.ROCK, inputHandler.getRockPaperScissorsInput());
-        inputHandler.setInput("rOcK");
-        assertEquals(GameChoice.ROCK, inputHandler.getRockPaperScissorsInput());
-        inputHandler.setInput("r");
-        assertEquals(GameChoice.ROCK, inputHandler.getRockPaperScissorsInput());
-        inputHandler.setInput("R");
-        assertEquals(GameChoice.ROCK, inputHandler.getRockPaperScissorsInput());
+        InputHandler inputHandler2 = new InputHandler("rOcK");
+        assertEquals(GameChoice.ROCK, inputHandler2.getRockPaperScissorsInput());
+        InputHandler inputHandler3 = new InputHandler("r");
+        assertEquals(GameChoice.ROCK, inputHandler3.getRockPaperScissorsInput());
+        InputHandler inputHandler4 = new InputHandler("R");
+        assertEquals(GameChoice.ROCK, inputHandler4.getRockPaperScissorsInput());
 
-        inputHandler.setInput("Paper");
-        assertEquals(GameChoice.PAPER, inputHandler.getRockPaperScissorsInput());
-        inputHandler.setInput("paPEr");
-        assertEquals(GameChoice.PAPER, inputHandler.getRockPaperScissorsInput());
-        inputHandler.setInput("p");
-        assertEquals(GameChoice.PAPER, inputHandler.getRockPaperScissorsInput());
-        inputHandler.setInput("P");
-        assertEquals(GameChoice.PAPER, inputHandler.getRockPaperScissorsInput());
+        InputHandler inputHandler5 = new InputHandler("Paper");
+        assertEquals(GameChoice.PAPER, inputHandler5.getRockPaperScissorsInput());
+        InputHandler inputHandler6 = new InputHandler("pApEr");
+        assertEquals(GameChoice.PAPER, inputHandler6.getRockPaperScissorsInput());
+        InputHandler inputHandler7 = new InputHandler("P");
+        assertEquals(GameChoice.PAPER, inputHandler7.getRockPaperScissorsInput());
+        InputHandler inputHandler8 = new InputHandler("p");
+        assertEquals(GameChoice.PAPER, inputHandler8.getRockPaperScissorsInput());
 
 
-        inputHandler.setInput("Scissors");
-        assertEquals(GameChoice.SCISSORS, inputHandler.getRockPaperScissorsInput());
-        inputHandler.setInput("sCissors");
-        assertEquals(GameChoice.SCISSORS, inputHandler.getRockPaperScissorsInput());
-        inputHandler.setInput("s");
-        assertEquals(GameChoice.SCISSORS, inputHandler.getRockPaperScissorsInput());
-        inputHandler.setInput("S");
-        assertEquals(GameChoice.SCISSORS, inputHandler.getRockPaperScissorsInput());
+        InputHandler inputHandler9 = new InputHandler("Scissors");
+        assertEquals(GameChoice.SCISSORS, inputHandler9.getRockPaperScissorsInput());
+        InputHandler inputHandler10 = new InputHandler("sCissors");
+        assertEquals(GameChoice.SCISSORS, inputHandler10.getRockPaperScissorsInput());
+        InputHandler inputHandler11 = new InputHandler("s");
+        assertEquals(GameChoice.SCISSORS, inputHandler11.getRockPaperScissorsInput());
+        InputHandler inputHandler12 = new InputHandler("S");
+        assertEquals(GameChoice.SCISSORS, inputHandler12.getRockPaperScissorsInput());
     }
 
     /**
@@ -49,12 +48,11 @@ public class InputHandlerTest {
      */
     @Test
     public void testIncorrectInputYieldsEmptyInput() {
-        InputHandler inputHandler = new InputHandler();
-        inputHandler.setInput("Blabber");
+        InputHandler inputHandler = new InputHandler("Blabber");
         assertEquals(GameChoice.EMPTY, inputHandler.getRockPaperScissorsInput());
 
-        inputHandler.setInput("dingerdonger");
-        assertEquals(GameChoice.EMPTY, inputHandler.getRockPaperScissorsInput());
+        InputHandler inputHandler2 = new InputHandler("dingerdonger");
+        assertEquals(GameChoice.EMPTY, inputHandler2.getRockPaperScissorsInput());
 
     }
 
@@ -63,21 +61,20 @@ public class InputHandlerTest {
      */
     @Test
     public void testCorrectGameActionIsReturned() {
-        InputHandler inputHandler = new InputHandler();
-        inputHandler.setInput("load");
+        InputHandler inputHandler = new InputHandler("load");
         assertEquals(GameAction.LOAD, inputHandler.getGameActionInput());
 
-        inputHandler.setInput("LOAD");
-        assertEquals(GameAction.LOAD, inputHandler.getGameActionInput());
+        InputHandler inputHandler2 = new InputHandler("LOAD");
+        assertEquals(GameAction.LOAD, inputHandler2.getGameActionInput());
 
-        inputHandler.setInput("L");
-        assertEquals(GameAction.LOAD, inputHandler.getGameActionInput());
+        InputHandler inputHandler3 = new InputHandler("L");
+        assertEquals(GameAction.LOAD, inputHandler3.getGameActionInput());
 
-        inputHandler.setInput("Safe");
-        assertEquals(GameAction.SAFE, inputHandler.getGameActionInput());
+        InputHandler inputHandler4 = new InputHandler("Safe");
+        assertEquals(GameAction.SAFE, inputHandler4.getGameActionInput());
 
-        inputHandler.setInput("s");
-        assertEquals(GameAction.SAFE, inputHandler.getGameActionInput());
+        InputHandler inputHandler5 = new InputHandler("s");
+        assertEquals(GameAction.SAFE, inputHandler5.getGameActionInput());
 
     }
 }

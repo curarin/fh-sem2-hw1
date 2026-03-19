@@ -10,6 +10,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
+/**
+ * File writer which stores the current GameMove into a comma-seperated file with fixed schema.
+ */
 @Log4j2
 public class FileWriter {
     public void writeFile(List<GameMove> gameMoves) throws IOException {

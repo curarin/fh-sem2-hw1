@@ -2,6 +2,10 @@ package org.lecture.model;
 
 import lombok.Getter;
 
+/**
+ * Fixed values which represents the choice of action during a Rock-Paper-Scissors-Game
+ * Returns on demand the Shortname.
+ */
 @Getter
 public enum GameChoice {
     ROCK("R"),

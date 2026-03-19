@@ -10,6 +10,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+/**
+ * End-to-End-Simulation of the Rock-Paper-Scissors-Game. Shall only be called from Main.
+ */
 @Log4j2
 public class GameSimulation {
     public void runSimulation() {

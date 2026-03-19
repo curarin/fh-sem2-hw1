@@ -9,6 +9,7 @@ import java.util.List;
 /**
  * Represents the game board as a whole of a ROCK-PAPER-SCISSORS game.
  * Has a 1:n relationship with GameMove class.
+ * Is immutable.
  */
 @Log4j2
 @Getter

@@ -3,7 +3,7 @@ package org.lecture.model;
 import lombok.Getter;
 
 /**
- * Fixed values for the participating players
+ * Fixed values for the participating players - also represents potential winners or wether the GamePlayer is set or not.
  */
 @Getter
 public enum GamePlayer {

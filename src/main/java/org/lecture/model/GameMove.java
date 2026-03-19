@@ -4,7 +4,8 @@ import lombok.*;
 import lombok.extern.log4j.Log4j2;
 
 /**
- * Represents a game move of a ROCK-PAPER-SCISSORS game.
+ * Represents a game move of a ROCK-PAPER-SCISSORS game. A Game Move consists of a Playerchoice as well as
+ * a computer Choice. When instantiated we also calculate the winner with the constructor.
  */
 @ToString
 @Getter
