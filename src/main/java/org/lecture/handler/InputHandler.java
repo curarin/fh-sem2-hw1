@@ -7,6 +7,8 @@ import lombok.extern.log4j.Log4j2;
 import org.lecture.model.GameAction;
 import org.lecture.model.GameChoice;
 
+import java.util.Scanner;
+
 /**
  * Helper function for input handling. Setter is used as helper for unit testing this.
  * Two constructors are here to be used - no args for production, all args for unit tests.
@@ -18,13 +20,21 @@ import org.lecture.model.GameChoice;
 public class InputHandler {
     String input;
 
+
     /**
      * Gets input for user choices - either Rock, Paper or Scissors are needed
      * @return GameChoice (ROCK, PAPER, SCISSORS)
      */
     public GameChoice getRockPaperScissorsInput() {
         log.trace("getRockPaperScissorsInput()");
-        String choice = this.input;
+        String choice;
+        if (this.input == null) {
+            Scanner scanner = new Scanner(System.in);
+            choice = scanner.nextLine();
+        } else {
+            choice = this.input;
+        }
+
 
         char startingLetter = choice.toLowerCase().charAt(0);
 
@@ -47,7 +57,15 @@ public class InputHandler {
      */
     public GameAction getGameActionInput() {
         log.trace("getGameActionInput()");
-        String choice = this.input;
+
+        String choice;
+        if (this.input == null) {
+            Scanner scanner = new Scanner(System.in);
+            choice = scanner.nextLine();
+        } else {
+            choice = this.input;
+        }
+
         char startingLetter = choice.toLowerCase().charAt(0);
         log.info("choice given is '{}'", choice);
         log.info("starting letter is '{}'", startingLetter);
