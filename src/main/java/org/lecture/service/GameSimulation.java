@@ -33,7 +33,6 @@ public class GameSimulation {
                 GameLoadHandler gameLoadHandler = new GameLoadHandler();
                 gameScore = gameLoadHandler.generateGameScoreFromGameSafe();
                 gameBoard = gameLoadHandler.generateGameBoardFromGameSafe();
-                System.out.println(gameBoard);
             }
         }
 
@@ -51,8 +50,6 @@ public class GameSimulation {
                         .build();
                 gameScore.addToCount(currentGameMove.getWinner());
                 gameBoard = gameBoard.playMove(currentGameMove);
-                System.out.println(gameBoard);
-                System.out.println(gameScore);
                 gameBoard.printGameBoard();
 
                 if(gameScore.gameIsRunning()) {
