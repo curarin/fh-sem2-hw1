@@ -77,4 +77,14 @@ public class InputHandlerTest {
         assertEquals(GameAction.SAFE, inputHandler5.getGameActionInput());
 
     }
+
+    /**
+     * Validates that blank inputs are now correctly returning Blank / Nothing States.
+     */
+    @Test
+    public void testBlankInputsNowCorrectlyReturnEmptyOrNothingState() {
+        InputHandler inputHandler = new InputHandler("");
+        assertEquals(GameAction.NOTHING, inputHandler.getGameActionInput());
+        assertEquals(GameChoice.EMPTY, inputHandler.getRockPaperScissorsInput());
+    }
 }
