@@ -29,7 +29,7 @@ public class GameBoardTest {
                 .playerChoice(GameChoice.ROCK)
                 .computerChoice(GameChoice.ROCK)
                 .build();
-        GameBoard gameBoardAfterMoveOne = gameBoard.addGameMoveToGameBoard(gameMoveOne);
+        GameBoard gameBoardAfterMoveOne = gameBoard.playMove(gameMoveOne);
         assertEquals(GameChoice.ROCK, gameBoardAfterMoveOne.getGameMoves().getFirst().getPlayerChoice());
         assertEquals(4, gameBoardAfterMoveOne.getGameMoves().stream().filter(gameMove -> gameMove.getWinner().equals(GamePlayer.NOT_SET)).count());
     }
@@ -49,8 +49,8 @@ public class GameBoardTest {
                 .computerChoice(GameChoice.ROCK)
                 .build();
 
-        GameBoard gameBoardAfterMoveOne = gameBoard.addGameMoveToGameBoard(gameMoveOne);
-        GameBoard gameBoardAfterMoveTwo = gameBoardAfterMoveOne.addGameMoveToGameBoard(gameMoveTwo);
+        GameBoard gameBoardAfterMoveOne = gameBoard.playMove(gameMoveOne);
+        GameBoard gameBoardAfterMoveTwo = gameBoardAfterMoveOne.playMove(gameMoveTwo);
 
         assertEquals(4, gameBoardAfterMoveOne.getGameMoves().stream().filter(gameMove -> gameMove.getWinner().equals(GamePlayer.NOT_SET)).count());
         assertEquals(3, gameBoardAfterMoveTwo.getGameMoves().stream().filter(gameMove -> gameMove.getWinner().equals(GamePlayer.NOT_SET)).count());
@@ -71,8 +71,8 @@ public class GameBoardTest {
                 .computerChoice(GameChoice.ROCK)
                 .build();
 
-        GameBoard gameBoardAfterMoveOne = gameBoard.addGameMoveToGameBoard(gameMoveOne);
-        gameBoard.addGameMoveToGameBoard(gameMoveOne);
+        GameBoard gameBoardAfterMoveOne = gameBoard.playMove(gameMoveOne);
+        gameBoard.playMove(gameMoveOne);
 
         assertEquals(5, gameBoard.getGameMoves().stream().filter(gameMove -> gameMove.getWinner().equals(GamePlayer.NOT_SET)).count());
         assertNotEquals(gameBoard, gameBoardAfterMoveOne);

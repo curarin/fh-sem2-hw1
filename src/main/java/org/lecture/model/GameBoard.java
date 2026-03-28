@@ -48,7 +48,7 @@ public final class GameBoard {
      * @param gameMove current Game Move
      * @return updated GameBoard which is immutable
      */
-    public GameBoard addGameMoveToGameBoard(GameMove gameMove) {
+    public GameBoard playMove(GameMove gameMove) {
         log.trace("addGameMoveToGameBoard");
         log.info("Adding {} to Array", gameMove);
 

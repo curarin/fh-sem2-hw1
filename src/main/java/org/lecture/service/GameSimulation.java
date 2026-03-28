@@ -50,7 +50,7 @@ public class GameSimulation {
                         .computerChoice(currentComputerGameChoice)
                         .build();
                 gameScore.addToCount(currentGameMove.getWinner());
-                gameBoard = gameBoard.addGameMoveToGameBoard(currentGameMove);
+                gameBoard = gameBoard.playMove(currentGameMove);
                 System.out.println(gameBoard);
                 System.out.println(gameScore);
                 gameBoard.printGameBoard();
