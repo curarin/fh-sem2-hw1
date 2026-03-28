@@ -1,8 +1,6 @@
 package org.lecture.handler;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.lecture.model.GameAction;
 import org.lecture.model.GameChoice;
@@ -14,32 +12,52 @@ import java.util.Scanner;
  * Two constructors are here to be used - no args for production, all args for unit tests.
  */
 @Log4j2
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
 public class InputHandler {
-    String input;
+    private String input;
+    private Scanner scanner;
+
+    /**
+     * Empty constructor which is used for getting user input from CLI (e.g. during production).
+     */
+    public InputHandler() {
+        this.scanner = new Scanner(System.in);
+    }
+
+    /**
+     * Constructor which is used solely for unit-testing purposes.
+     */
+    public InputHandler(String input) {
+        this.input = input;
+    }
 
 
+    /**
+     * Reads input from CLI.
+     */
+    public String readInput() {
+        if (scanner != null) {
+            return scanner.nextLine();
+        }
+        return input;
+
+    }
     /**
      * Gets input for user choices - either Rock, Paper or Scissors are needed
      * @return GameChoice (ROCK, PAPER, SCISSORS)
      */
     public GameChoice getRockPaperScissorsInput() {
         log.trace("getRockPaperScissorsInput()");
-        String choice;
-        if (this.input == null) {
-            Scanner scanner = new Scanner(System.in);
-            choice = scanner.nextLine();
-        } else {
-            choice = this.input;
-        }
+        String choice = readInput();
 
+        // We need that for "" inputs.
+        if (choice == null || choice.isBlank()) {
+            return GameChoice.EMPTY;
+        }
 
         char startingLetter = choice.toLowerCase().charAt(0);
 
-        log.info("choice given is '{}'", choice);
-        log.info("starting letter is '{}'", startingLetter);
+        logProducer(choice, startingLetter);
         if (startingLetter == 'r') {
             return GameChoice.ROCK;
         } else if (startingLetter == 'p') {
@@ -58,17 +76,15 @@ public class InputHandler {
     public GameAction getGameActionInput() {
         log.trace("getGameActionInput()");
 
-        String choice;
-        if (this.input == null) {
-            Scanner scanner = new Scanner(System.in);
-            choice = scanner.nextLine();
-        } else {
-            choice = this.input;
+        String choice = readInput();
+
+        // We need that for "" inputs.
+        if (choice == null || choice.isBlank()) {
+            return GameAction.NOTHING;
         }
 
         char startingLetter = choice.toLowerCase().charAt(0);
-        log.info("choice given is '{}'", choice);
-        log.info("starting letter is '{}'", startingLetter);
+        logProducer(choice, startingLetter);
         if (startingLetter == 's') {
             return GameAction.SAFE;
         } else if (startingLetter == 'l') {
@@ -78,5 +94,15 @@ public class InputHandler {
         } else {
             return GameAction.NOTHING;
         }
+    }
+
+    /**
+     * Generate Log Info for InputHandler only.
+     */
+    private void logProducer(String choice, char letter) {
+        log.trace("logProducer()");
+
+        log.info("choice given is '{}'", choice);
+        log.info("letter is '{}'", letter);
     }
 }
